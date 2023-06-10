@@ -2,7 +2,7 @@
 
 
 # Users Crud Reqress
-this repository is about CRUD users using reqres.in api
+this repository is about CRUD users using reqres.in api. 
 You can find .apk on root folder
 
 ## API Reference
