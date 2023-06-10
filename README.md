@@ -1,16 +1,53 @@
-# user_crud_reqres
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Users Crud Reqress
+this repository is about CRUD users using reqres.in api
 
-A few resources to get you started if this is your first Flutter project:
+## API Reference
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+For Api we use Reqres.in
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+## Tech Stack
+
+**Client:** Android Studio, Flutter, flutter_screenutil, go_router, google_fonts, intro_slider
+
+
+
+## Installation
+Make sure your workstation has installed the Flutter framework(Stable)
+
+for Instalation Flutter Framework visit this [setup flutter framewrk](https://docs.flutter.dev/get-started/install)
+
+Clone the project first
+
+```bash
+  git clone https://github.com/milzamhibatullah/user_crud_reqress.git
+  git fetch
+  git checkout master
+  git pull origin master
+```
+Enter the project directory
+```bash
+  cd user_crud_reqress/
+```
+Inside project directory, Clean the project first
+```bash
+  flutter clean
+```
+After clean the project, run this command
+```bash
+  flutter pub get
+```
+
+After that, to run this project, run this command
+```bash
+  flutter run
+```
+
+For buildin APK, run this command
+```bash
+  flutter build apk --release
