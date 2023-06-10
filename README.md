@@ -3,6 +3,7 @@
 
 # Users Crud Reqress
 this repository is about CRUD users using reqres.in api
+You can find .apk on root folder
 
 ## API Reference
 
@@ -25,7 +26,7 @@ for Instalation Flutter Framework visit this [setup flutter framewrk](https://do
 Clone the project first
 
 ```bash
-  git clone https://github.com/milzamhibatullah/user_crud_reqress.git
+  git clone https://github.com/milzamhibatullah/user_crud_reqres.git
   git fetch
   git checkout master
   git pull origin master
