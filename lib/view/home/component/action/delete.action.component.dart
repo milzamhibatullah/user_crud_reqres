@@ -2,13 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:user_crud_reqres/viewmodel/user.viewmodel.dart';
 
 import '../../../../styles/font.styles.dart';
 
 class DeleteActionComponent extends StatelessWidget{
-  final VoidCallback deletMethod;
-
-  DeleteActionComponent({Key? key,required this.deletMethod}):super(key: key);
+  final UserViewModel viewModel;
+  final int id;
+  DeleteActionComponent({Key? key,required this.viewModel,required this.id}):super(key: key);
   @override
   Widget build(BuildContext context) {
     return IconButton.filledTonal(
@@ -69,6 +70,8 @@ class DeleteActionComponent extends StatelessWidget{
                       height: 45.0.r,
                       child: FilledButton(
                         onPressed: () {
+                          viewModel.delete(id);
+                          context.pop();
                         },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(

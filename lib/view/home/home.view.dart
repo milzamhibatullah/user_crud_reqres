@@ -11,7 +11,7 @@ import 'package:user_crud_reqres/styles/font.styles.dart';
 import 'package:user_crud_reqres/view/home/component/action/add.action.component.dart';
 import 'package:user_crud_reqres/view/home/component/action/delete.action.component.dart';
 import 'package:user_crud_reqres/view/home/component/action/edit.action.component.dart';
-import 'package:user_crud_reqres/viewmodel/home.viewmodel.dart';
+import 'package:user_crud_reqres/viewmodel/user.viewmodel.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -25,8 +25,9 @@ class HomeViewState extends State<HomeView> {
   late UserViewModel userViewModel;
 
   ///initialize text editing controller
-  final _nameController = TextEditingController();
-  final _jobController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lstNameController = TextEditingController();
+  final _emailController = TextEditingController();
 
   @override
   void initState() {
@@ -38,10 +39,12 @@ class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       floatingActionButton: AddActionComponent(
-        nameController: _nameController,
-        jobController: _jobController,
-        addMethod: userViewModel.add,
+        firstNameController: _firstNameController,
+        lastNameController: _lstNameController,
+        emailController: _emailController,
+        viewModel: userViewModel,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
@@ -128,12 +131,14 @@ class HomeViewState extends State<HomeView> {
                               ),
                               SizedBox(height: 16.0.r),
                               EditActionComponent(
-                                nameController: _nameController,
-                                jobController: _jobController,
-                                editMethod: userViewModel.edit,
+                                firstNameController: _firstNameController,
+                                lastNameController: _lstNameController,
+                                emailController: _emailController,
+                                viewModel: userViewModel,
                               ),
                               DeleteActionComponent(
-                                deletMethod: userViewModel.delete,
+                                viewModel: userViewModel,
+                                id: userViewModel.listUsers[index].id!,
                               ),
                             ],
                           ),

@@ -1,14 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../styles/font.styles.dart';
+import '../../../viewmodel/user.viewmodel.dart';
 
-class FormComponent extends StatelessWidget{
+class FormComponent extends StatelessWidget {
+  TextEditingController? firstNameController;
+  TextEditingController? lastNameController;
+  TextEditingController? emailController;
+  final UserViewModel viewModel;
+
+  FormComponent(this.firstNameController, this.lastNameController,
+      this.emailController, this.viewModel);
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: MediaQuery.of(context).viewInsets,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
@@ -31,8 +40,7 @@ class FormComponent extends StatelessWidget{
                   'Add New User',
                   style: fontStyles(
                       size: 16.0,
-                      color:
-                      Theme.of(context).colorScheme.onBackground),
+                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 const Spacer(),
                 IconButton(
@@ -48,17 +56,16 @@ class FormComponent extends StatelessWidget{
 
             ///field name
             TextField(
+              controller: firstNameController,
               style: fontStyles(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSecondaryContainer),
+                  color: Theme.of(context).colorScheme.onSecondaryContainer),
               decoration: InputDecoration(
                 filled: true,
                 prefixIcon: Icon(
                   Icons.account_circle,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                hintText: 'Input your name ...',
+                hintText: 'Input first name ...',
                 hintStyle: fontStyles(
                     size: 14.0,
                     color: Theme.of(context)
@@ -66,8 +73,7 @@ class FormComponent extends StatelessWidget{
                         .onSecondaryContainer
                         .withOpacity(.5),
                     weight: FontWeight.w500),
-                fillColor:
-                Theme.of(context).colorScheme.secondaryContainer,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0.r),
                     borderSide: BorderSide.none),
@@ -80,19 +86,18 @@ class FormComponent extends StatelessWidget{
               height: 8.0.r,
             ),
 
-            ///field job
+            ///field lastname
             TextField(
+              controller: lastNameController,
               style: fontStyles(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSecondaryContainer),
+                  color: Theme.of(context).colorScheme.onSecondaryContainer),
               decoration: InputDecoration(
                 filled: true,
                 prefixIcon: Icon(
                   Icons.work,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                hintText: 'Input your job ...',
+                hintText: 'Input last name ...',
                 hintStyle: fontStyles(
                     size: 14.0,
                     color: Theme.of(context)
@@ -100,8 +105,39 @@ class FormComponent extends StatelessWidget{
                         .onSecondaryContainer
                         .withOpacity(.5),
                     weight: FontWeight.w500),
-                fillColor:
-                Theme.of(context).colorScheme.secondaryContainer,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0.r),
+                    borderSide: BorderSide.none),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0.r),
+                    borderSide: BorderSide.none),
+              ),
+            ),
+            SizedBox(
+              height: 8.0.r,
+            ),
+
+            ///field email
+            TextField(
+              controller: emailController,
+              style: fontStyles(
+                  color: Theme.of(context).colorScheme.onSecondaryContainer),
+              decoration: InputDecoration(
+                filled: true,
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                hintText: 'Input email ...',
+                hintStyle: fontStyles(
+                    size: 14.0,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSecondaryContainer
+                        .withOpacity(.5),
+                    weight: FontWeight.w500),
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0.r),
                     borderSide: BorderSide.none),
@@ -117,8 +153,16 @@ class FormComponent extends StatelessWidget{
               width: double.infinity,
               height: 45.0.r,
               child: FilledButton(
-                onPressed: () {
-                  context.go('auth/new-password');
+                onPressed: () async {
+                  print(firstNameController!.text);
+                  print(lastNameController!.text);
+                  print(emailController!.text);
+                  viewModel.add(firstNameController!.text,
+                      lastNameController!.text, emailController!.text);
+                  firstNameController?.clear();
+                  lastNameController?.clear();
+                  emailController?.clear();
+                  context.pop();
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
@@ -142,5 +186,4 @@ class FormComponent extends StatelessWidget{
       ),
     );
   }
-
 }
