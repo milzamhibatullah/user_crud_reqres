@@ -9,12 +9,15 @@ class EditActionComponent extends StatelessWidget {
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? emailController;
-  final UserViewModel viewModel; // Notice the variable type
+  final UserViewModel viewModel;
+  final int id;
+
   EditActionComponent(
       {Key? key,
       required this.firstNameController,
       required this.lastNameController,
       required this.emailController,
+      required this.id,
       required this.viewModel})
       : super(key: key);
 
@@ -29,19 +32,33 @@ class EditActionComponent extends StatelessWidget {
           shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0.r)))),
       onPressed: () {
+        viewModel.onEdit = true;
+        final user = viewModel.listUsers.firstWhere((element) => element.id==id);
+        firstNameController?.text=user.firstName!;
+        lastNameController?.text=user.lastName!;
+        emailController?.text=user.email!;
         showModalBottomSheet<void>(
           context: context,
           isDismissible: false,
           useSafeArea: true,
+          isScrollControlled: true,
           builder: (BuildContext context) {
+
+
             return FormComponent(
               firstNameController,
               lastNameController,
               emailController,
               viewModel,
+              id: id,
             );
           },
-        );
+        ).whenComplete(() {
+          firstNameController?.clear();
+          lastNameController?.clear();
+          emailController?.clear();
+          viewModel.onEdit = false;
+        });
       },
       icon: Icon(
         Icons.edit_note,

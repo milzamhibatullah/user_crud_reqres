@@ -35,7 +35,11 @@ class AddActionComponent extends StatelessWidget {
               viewModel,
             );
           },
-        );
+        ).whenComplete(() {
+          firstNameController?.clear();
+          lastNameController?.clear();
+          emailController?.clear();
+        });
       },
       icon: Icon(
         Icons.add_box_rounded,

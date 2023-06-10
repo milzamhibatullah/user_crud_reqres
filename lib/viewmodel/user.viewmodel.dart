@@ -15,7 +15,7 @@ class UserViewModel extends UserRepository {
 
   List<Users> listUsers = [];
   bool isLoading = false;
-
+  bool onEdit = false;
   @override
   void delete(id) async {
     state.setState(() {
@@ -83,7 +83,35 @@ class UserViewModel extends UserRepository {
   }
 
   @override
-  void edit(id, String fistName, String lastName, String email) {
-    // TODO: implement edit
+  void edit(id, String fistName, String lastName, String email) async{
+    state.setState(() {
+      isLoading = true;
+    });
+    final response = await ApiConfig.instance.put(
+      'users/$id',
+      data: jsonEncode({
+        'first_name': fistName,
+        'last_name': lastName,
+        'email': email,
+      }),
+    );
+    if (response != 'error' && response != 'fatal') {
+      ///update data
+      print('update');
+      state.setState(() {
+        listUsers.forEach((element) {
+          if(element.id==id){
+            element.firstName=fistName;
+            element.lastName=lastName;
+            element.email=email;
+          }
+        });
+        isLoading = false;
+      });
+    } else {
+      state.setState(() {
+        isLoading = false;
+      });
+    }
   }
 }

@@ -58,14 +58,39 @@ class ApiConfig {
     }
   }
 
+  put(String url, {dynamic data}) async {
+    log('api url => ${_baseUrl + url}', name: 'API PUT URL');
+    try {
+      print(data);
+      var response = await http
+          .put(
+            Uri.parse(_baseUrl + url),
+            headers: _header(),
+            body: data,
+          )
+          .timeout(const Duration(seconds: 30));
+      log('response put => ${response.body}', name: 'API PUT');
+
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return "error";
+      }
+    } on TimeoutException {
+      return 'fatal';
+    } catch (e) {
+      return 'fatal';
+    }
+  }
+
   delete(String url) async {
     log('api url => ${_baseUrl + url}', name: 'API Delete URL');
     try {
       var response = await http
           .delete(
-        Uri.parse(_baseUrl + url),
-        headers: _header(),
-      )
+            Uri.parse(_baseUrl + url),
+            headers: _header(),
+          )
           .timeout(const Duration(seconds: 30));
       log('response delete => ${response.body}', name: 'API DELETE');
 

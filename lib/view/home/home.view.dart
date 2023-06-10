@@ -134,6 +134,7 @@ class HomeViewState extends State<HomeView> {
                                 firstNameController: _firstNameController,
                                 lastNameController: _lstNameController,
                                 emailController: _emailController,
+                                id:userViewModel.listUsers[index].id! ,
                                 viewModel: userViewModel,
                               ),
                               DeleteActionComponent(

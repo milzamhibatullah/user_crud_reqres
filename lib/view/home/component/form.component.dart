@@ -9,10 +9,12 @@ class FormComponent extends StatelessWidget {
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? emailController;
+  int? id;
   final UserViewModel viewModel;
 
   FormComponent(this.firstNameController, this.lastNameController,
-      this.emailController, this.viewModel);
+      this.emailController, this.viewModel,
+      {this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -157,11 +159,21 @@ class FormComponent extends StatelessWidget {
                   print(firstNameController!.text);
                   print(lastNameController!.text);
                   print(emailController!.text);
-                  viewModel.add(firstNameController!.text,
-                      lastNameController!.text, emailController!.text);
-                  firstNameController?.clear();
-                  lastNameController?.clear();
-                  emailController?.clear();
+                  if (viewModel.onEdit) {
+                    viewModel.edit(
+                      id,
+                      firstNameController!.text,
+                      lastNameController!.text,
+                      emailController!.text,
+                    );
+                  }else{
+                    viewModel.add(
+                      firstNameController!.text,
+                      lastNameController!.text,
+                      emailController!.text,
+                    );
+                  }
+
                   context.pop();
                 },
                 style: ButtonStyle(
