@@ -19,6 +19,7 @@ class IntroViewState extends State<IntroView> {
 
   @override
   void initState() {
+    ///initiate the intro items
     listContentConfig.add(
       ContentConfig(
         styleTitle: fontStyles(size: 24.0, weight: FontWeight.bold),
@@ -49,8 +50,7 @@ class IntroViewState extends State<IntroView> {
         styleDescription: fontStyles(size: 16.0),
         heightImage: 320.0.r,
         widthImage: 320.0.r,
-        description:
-            "Lets start your experience to managing users now",
+        description: "Lets start your experience to managing users now",
         pathImage: "assets/illustration/intro_3.png",
         backgroundColor: Colors.white,
       ),
@@ -59,9 +59,10 @@ class IntroViewState extends State<IntroView> {
   }
 
   void onDonePress() => goHomeScreen();
-  void onSkipPress()=>goHomeScreen();
 
-  void goHomeScreen()=>context.go('/home');
+  void onSkipPress() => goHomeScreen();
+
+  void goHomeScreen() => context.go('/home');
 
   @override
   Widget build(BuildContext context) {

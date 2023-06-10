@@ -16,6 +16,7 @@ class UserViewModel extends UserRepository {
   List<Users> listUsers = [];
   bool isLoading = false;
   bool onEdit = false;
+
   @override
   void delete(id) async {
     state.setState(() {
@@ -83,7 +84,7 @@ class UserViewModel extends UserRepository {
   }
 
   @override
-  void edit(id, String fistName, String lastName, String email) async{
+  void edit(id, String fistName, String lastName, String email) async {
     state.setState(() {
       isLoading = true;
     });
@@ -100,10 +101,10 @@ class UserViewModel extends UserRepository {
       print('update');
       state.setState(() {
         listUsers.forEach((element) {
-          if(element.id==id){
-            element.firstName=fistName;
-            element.lastName=lastName;
-            element.email=email;
+          if (element.id == id) {
+            element.firstName = fistName;
+            element.lastName = lastName;
+            element.email = email;
           }
         });
         isLoading = false;
